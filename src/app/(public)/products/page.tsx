@@ -2,11 +2,11 @@
 import ProductFilterWrapper from "@/modules/products/components/ProductFilterWrapper";
 
 interface Props {
-  searchParams: { category?: string };
+  searchParams: Promise<{ category?: string }>;
 }
 
-export default function ProductsPage({ searchParams }: Props) {
-  const category = searchParams.category || "";
+export default async function ProductsPage({ searchParams }: Props) {
+  const { category = "" } = await searchParams;
 
   return (
     <div className="container mx-auto py-6">
