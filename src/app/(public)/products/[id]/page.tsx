@@ -11,13 +11,7 @@ async function getProduct(id: string): Promise<Product> {
   return res.json();
 }
 
-export default async function ProductPage({
-  params,
-  searchParams,
-}: {
-  params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+export default async function ProductPage({ params }: { params: { id: string } }) {
   const product = await getProduct(params.id);
 
   return (
