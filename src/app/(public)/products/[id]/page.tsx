@@ -3,22 +3,14 @@ import { notFound } from 'next/navigation';
 import { Product } from '@/modules/products/types/product';
 import ProductDetailCard from '@/modules/products/components/ProductDetailCard';
 
-// 1. Define a type for your component's props
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
-}
-
 async function getProduct(id: string): Promise<Product> {
   const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error('Failed to fetch product');
+  if (!res.ok) return notFound();
   return res.json();
 }
 
-// 2. Use the defined type in your function signature
 export default async function ProductPage({
   params,
   searchParams,
@@ -26,7 +18,8 @@ export default async function ProductPage({
   params: { id: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const product = await getProduct(params.id).catch(() => notFound());
+  const product = await getProduct(params.id);
+
   return (
     <main className="container mx-auto p-6">
       <ProductDetailCard product={product} />
