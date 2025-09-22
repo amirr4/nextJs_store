@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { Product } from "@/modules/products/types/product";
 import ProductDetailCard from "@/modules/products/components/ProductDetailCard";
 
-interface Props {
+interface PageProps {
   params: { id: string };
 }
 
@@ -14,10 +14,12 @@ async function getProduct(id: string): Promise<Product> {
   return res.json();
 }
 
-export default async function ProductPage({ params }: Props) {
+export default async function ProductPage({ params }: PageProps) {
+  const { id } = params;
+
   let product: Product;
   try {
-    product = await getProduct(params.id);
+    product = await getProduct(id);
   } catch (e) {
     notFound();
   }
