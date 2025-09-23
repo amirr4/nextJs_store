@@ -1,13 +1,13 @@
-"use client";
-import { ShoppingCart } from "lucide-react";
-import { useCartStore } from "@/modules/cart/store/cartStore";
+'use client';
+import { ShoppingCart } from 'lucide-react';
+import { useCartStore } from '@/modules/cart/store/cartStore';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function Navbar() {
   const { items } = useCartStore();
@@ -23,11 +23,6 @@ export default function Navbar() {
         <Link href="/products" className="hover:underline">
           Products
         </Link>
-
-        <Link href="/cryptos" className="hover:underline">
-          Crypto
-        </Link>
-
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative p-0">
@@ -45,10 +40,7 @@ export default function Navbar() {
             ) : (
               <ul className="space-y-2">
                 {items.map((item) => (
-                  <li
-                    key={item.cartId}
-                    className="flex justify-between text-sm border-b pb-1"
-                  >
+                  <li key={item.cartId} className="flex justify-between text-sm border-b pb-1">
                     <span>
                       {item.title} × {item.quantity}
                     </span>

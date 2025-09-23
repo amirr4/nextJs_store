@@ -22,7 +22,7 @@ export default function ProductFilter({ onFilter }: Props) {
   }, [range, search, sort]);
 
   return (
-    <div className="flex flex-wrap gap-4 items-center justify-between mb-6">
+    <div className="flex flex-wrap gap-4 items-center justify-between mb-6 px-4 sm:px-6 lg:px-8 ">
       {/* Price Slider */}
       <div>
         <p className="text-sm font-medium mb-2">
