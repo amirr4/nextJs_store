@@ -12,41 +12,18 @@ Features include product listing, filtering, sorting, shopping cart with persist
 - Skeletons for loading states
 - Responsive design with Tailwind CSS
 
+## Tech Stack
+
+- Next.js 15
+- TypeScript
+- Tailwind CSS
+- Zustand for state management
+- Framer Motion for animations
+- React Query for data fetching# nextJs_store
+
 ## Getting Started
 
 Clone the repository and install dependencies:
 
-```bash
-git clone <repo-url>
-cd <project-folder>
 npm install
 npm run dev
-
-Open http://localhost:3000
- in your browser.
-
-Scripts
-
-npm run dev - start development server
-
-npm run build - build production version
-
-npm run start - start production server
-
-npm run lint - run ESLint
-
-npm run format - format code with Prettier
-
-Tech Stack
-
-Next.js 15
-
-TypeScript
-
-Tailwind CSS
-
-Zustand for state management
-
-Framer Motion for animations
-
-React Query for data fetching# nextJs_store
