@@ -8,10 +8,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Navbar() {
   const { items } = useCartStore();
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
+
+  const [open, setOpen] = useState(false);
 
   return (
     <nav className="w-full bg-white shadow-md px-6 py-3 flex justify-between items-center sticky top-0 z-50">
@@ -23,7 +26,7 @@ export default function Navbar() {
         <Link href="/products" className="hover:underline">
           Products
         </Link>
-        <DropdownMenu>
+        <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative p-0">
               <ShoppingCart className="w-12 h-12" />
@@ -40,7 +43,10 @@ export default function Navbar() {
             ) : (
               <ul className="space-y-2">
                 {items.map((item) => (
-                  <li key={item.cartId} className="flex justify-between text-sm border-b pb-1">
+                  <li
+                    key={item.cartId}
+                    className="flex justify-between text-sm border-b pb-1"
+                  >
                     <span>
                       {item.title} × {item.quantity}
                     </span>
@@ -53,6 +59,7 @@ export default function Navbar() {
             <div className="mt-3">
               <Link
                 href="/cart"
+                onClick={() => setOpen(false)} 
                 className="block w-full text-center bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
               >
                 View Cart

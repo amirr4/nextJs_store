@@ -1,15 +1,9 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { useCartStore } from "../store/cartStore";
+'use client';
+import { Button } from '@/components/ui/button';
+import { useCartStore } from '../store/cartStore';
 
 export default function CartList() {
-  const {
-    items,
-    removeFromCart,
-    clearCart,
-    increaseQuantity,
-    decreaseQuantity,
-  } = useCartStore();
+  const { items, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCartStore();
 
   if (items.length === 0) {
     return <p className="mt-6 text-gray-500">🛒 Your cart is empty</p>;
@@ -25,32 +19,26 @@ export default function CartList() {
         {items.map((item) => (
           <li
             key={item.cartId}
-            className="flex justify-between items-center border p-2 rounded-md"
+            className="flex flex-col sm:flex-row sm:justify-between sm:items-center border p-2 rounded-md gap-3"
           >
             <span className="flex-1 font-bold">
               {item.title} - ${item.price}
             </span>
 
-            <div className="flex items-center gap-2 px-4">
-              <Button
-                size="sm"
-                onClick={() => decreaseQuantity(item.cartId)}
-                variant="outline"
-              >
+            <div className="flex items-center gap-2">
+              <Button size="sm" onClick={() => decreaseQuantity(item.cartId)} variant="outline">
                 -
               </Button>
               <span>{item.quantity}</span>
-              <Button
-                size="sm"
-                onClick={() => increaseQuantity(item.cartId)}
-                variant="outline"
-              >
+              <Button size="sm" onClick={() => increaseQuantity(item.cartId)} variant="outline">
                 +
               </Button>
-            </div> 
+            </div>
+
             <Button
               variant="destructive"
               size="sm"
+              className="w-full sm:w-auto"
               onClick={() => removeFromCart(item.cartId)}
             >
               Remove
