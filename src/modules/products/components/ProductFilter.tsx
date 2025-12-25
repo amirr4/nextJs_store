@@ -17,19 +17,23 @@ export default function ProductFilter({ onFilter }: Props) {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<"asc" | "desc" | "">("");
 
+  // Debounced effect برای جلوگیری از update بیش از حد
   useEffect(() => {
-    onFilter(range[0], range[1], search, sort);
-  }, [onFilter, range, search, sort]);
+    const timer = setTimeout(() => {
+      onFilter(range[0], range[1], search, sort);
+    }, 200); // 200ms delay
+
+    return () => clearTimeout(timer);
+  }, [range, search, sort, onFilter]);
 
   return (
-    <div className="flex flex-wrap gap-4 items-center justify-between mb-6 px-4 sm:px-6 lg:px-8 ">
+    <div className="flex flex-wrap gap-4 items-center justify-between mb-6 px-4 sm:px-6 lg:px-8">
       {/* Price Slider */}
       <div>
         <p className="text-sm font-medium mb-2">
           Price: {range[0]}$ - {range[1]}$
         </p>
         <Slider
-          defaultValue={[0, 1000]}
           min={0}
           max={2000}
           step={10}

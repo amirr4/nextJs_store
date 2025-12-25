@@ -1,6 +1,5 @@
-// src/modules/products/components/ProductFilterWrapper.tsx
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ProductList from "./ProductList";
 import ProductFilter from "./ProductFilter";
 import { Product } from "../types/product";
@@ -34,28 +33,25 @@ export default function ProductFilterWrapper({ initialCategory }: Props) {
         setLoading(false);
       }
     };
-
     load();
   }, [initialCategory]);
 
-  const handleFilter = (
-    min: number | "",
-    max: number | "",
-    search: string,
-    sort: "asc" | "desc" | ""
-  ) => {
-    let result = products.filter((p) => {
-      const matchPrice =
-        (min === "" || p.price >= min) && (max === "" || p.price <= max);
-      const matchSearch = p.title.toLowerCase().includes(search.toLowerCase());
-      return matchPrice && matchSearch;
-    });
+  const handleFilter = useCallback(
+    (min: number | "", max: number | "", search: string, sort: "asc" | "desc" | "") => {
+      let result = products.filter((p) => {
+        const matchPrice =
+          (min === "" || p.price >= min) && (max === "" || p.price <= max);
+        const matchSearch = p.title.toLowerCase().includes(search.toLowerCase());
+        return matchPrice && matchSearch;
+      });
 
-    if (sort === "asc") result = [...result].sort((a, b) => a.price - b.price);
-    if (sort === "desc") result = [...result].sort((a, b) => b.price - a.price);
+      if (sort === "asc") result = [...result].sort((a, b) => a.price - b.price);
+      if (sort === "desc") result = [...result].sort((a, b) => b.price - a.price);
 
-    setFiltered(result);
-  };
+      setFiltered(result);
+    },
+    [products]
+  );
 
   return (
     <div>
