@@ -19,7 +19,7 @@ export default function ProductFilter({ onFilter }: Props) {
 
   useEffect(() => {
     onFilter(range[0], range[1], search, sort);
-  }, [range, search, sort]);
+  }, [onFilter, range, search, sort]);
 
   return (
     <div className="flex flex-wrap gap-4 items-center justify-between mb-6 px-4 sm:px-6 lg:px-8 ">

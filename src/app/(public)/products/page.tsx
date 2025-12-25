@@ -1,12 +1,12 @@
 import ProductFilterWrapper from "@/modules/products/components/ProductFilterWrapper";
 
-// 1. Define the type to expect a Promise
+
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string }>; 
 }) {
-  // 2. Await the searchParams before using them
+  
   const resolvedSearchParams = await searchParams;
   const category = resolvedSearchParams.category ?? "";
 
