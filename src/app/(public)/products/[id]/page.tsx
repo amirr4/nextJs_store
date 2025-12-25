@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation';
 import { Product } from '@/modules/products/types/product';
 import ProductDetailCard from '@/modules/products/components/ProductDetailCard';
-
+export const dynamic = 'force-dynamic';
 async function getProduct(id: string): Promise<Product> {
   const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
     cache: 'no-store',
