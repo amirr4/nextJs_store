@@ -1,11 +1,10 @@
 import ProductFilterWrapper from "@/modules/products/components/ProductFilterWrapper";
 
+type Props = {
+  searchParams: Promise<{ category?: string }>;
+};
 
-export default async function ProductsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ category?: string }>; 
-}) {
+export default async function ProductsPage({ searchParams }: Props) {
   
   const resolvedSearchParams = await searchParams;
   const category = resolvedSearchParams.category ?? "";
