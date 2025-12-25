@@ -1,7 +1,7 @@
 // src/modules/home/components/Banner.tsx
-import Image from 'next/image';
-import * as React from 'react';
-import Link from 'next/link';
+import Image from "next/image";
+import * as React from "react";
+import Link from "next/link";
 import {
   Carousel,
   CarouselContent,
@@ -10,7 +10,7 @@ import {
   CarouselPrevious,
   Card,
   CardContent,
-} from '@/components/ui';
+} from "@/components/ui";
 
 interface CategoryImage {
   category: string;
@@ -18,28 +18,19 @@ interface CategoryImage {
 }
 
 async function getCategoryImages(): Promise<CategoryImage[]> {
-  const categories = ["men's clothing", "women's clothing", 'jewelery', 'electronics'];
-
+  const categories = [
+    "men's clothing",
+    "women's clothing",
+    "jewelery",
+    "electronics",
+  ];
   const promises = categories.map(async (cat) => {
-    try {
-      const res = await fetch(
-        `https://fakestoreapi.com/products/category/${encodeURIComponent(cat)}`,
-        { cache: 'no-store' }, // مهم برای SSR
-      );
-
-      if (!res.ok) {
-        console.error('Failed to fetch category:', cat);
-        return { category: cat, image: '/placeholder.png' };
-      }
-
-      const data = await res.json();
-      return { category: cat, image: data?.[1]?.image || '/placeholder.png' };
-    } catch (err) {
-      console.error('Error fetching category:', cat, err);
-      return { category: cat, image: '/placeholder.png' };
-    }
+    const res = await fetch(
+      `https://fakestoreapi.com/products/category/${encodeURIComponent(cat)}`
+    );
+    const data = await res.json();
+    return { category: cat, image: data[1]?.image || "/placeholder.png" };
   });
-
   return Promise.all(promises);
 }
 
@@ -47,7 +38,7 @@ export default async function Banner() {
   const images = await getCategoryImages();
 
   return (
-    <Carousel opts={{ align: 'start' }} className="w-full">
+    <Carousel opts={{ align: "start" }} className="w-full">
       <CarouselContent>
         {images.map((img, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
