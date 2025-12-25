@@ -24,7 +24,7 @@ async function getCategoryImages(): Promise<CategoryImage[]> {
     try {
       const res = await fetch(
         `https://fakestoreapi.com/products/category/${encodeURIComponent(cat)}`,
-       // { cache: 'no-store' }, 
+        { next: { revalidate: 10 } },
       );
 
       if (!res.ok) {
